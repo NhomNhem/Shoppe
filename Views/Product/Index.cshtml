@@ -1,0 +1,43 @@
+﻿@* @model IEnumerable<DemoDB2.Models.Product>*@
+@using DemoDB2.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Master_Layout.cshtml";
+}
+<style>
+    #div-ds {
+        text-align: center;
+        background-color: #808080;
+        height: 50px;
+        border-radius: 20px 20px 0 0;
+    }
+    .MenuPage li{
+        display:inline;
+    }
+</style>
+<link rel="stylesheet" href="~/Content/Index.css">
+<div id="div-ds"><h2 style="padding-top:10px;color:white">DANH SÁCH SẢN PHẨM</h2></div>
+<div class="container">
+    <div class="row">
+        @foreach (var pro in Model)
+        {
+            <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card-pro">
+                    <p>@Html.DisplayFor(model => pro.ProductID)</p>
+                    <img src="@Url.Content(pro.ImagePro)" height="150" width="150" />
+                    <p>@Html.DisplayFor(model => pro.NamePro)</p>
+                    <p>@Html.DisplayFor(model => pro.Price)</p>
+                    <a href="/ShoppingCart/AddToCart/@pro.ProductID" class="btn btn-default">Buy</a>
+                    
+                </div>
+            </div>
+        }
+    </div>
+</div>
+Trang @(Model.PageCount<Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+<div class="MenuPage">
+    @Html.PagedListPager(Model,Page=> Url.Action("Index",new {Page=Page}))
+</div>
+

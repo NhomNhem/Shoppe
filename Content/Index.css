@@ -1,0 +1,10 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.Picture {
+    background-color: aquamarine;
+    align-content: center;
+    align-items: center;
+}
